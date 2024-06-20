@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #687f6c;
+    --border-radius: 10px;
+    --on-primary: #fff;
+    --background-color: #121212;
+    --dp-00: rgba(255,255,255, 0);
+    --dp-01: rgba(255,255,255, 0.05);
+    --dp-02: rgba(255,255,255, 0.07);
+    --dp-03: rgba(255,255,255, 0.08);
+    --dp-04: rgba(255,255,255, 0.09);
+    --dp-06: rgba(255,255,255, 0.11);
+    --dp-08: rgba(255,255,255, 0.12);
+    --dp-12: rgba(255,255,255, 0.14);
+    --dp-16: rgba(255,255,255, 0.15);
+    --dp-24: rgba(255,255,255, 0.16);
+}
+
+/* FIXME: multiple stacked overlays distorts elevation; */
+/* Example: .modal-header */
+
 html {
     box-sizing: border-box;
 }
@@ -5,4 +27,192 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
+    font-family: 'Exo', sans-serif;
+    letter-spacing: 2px;
+    background-color: var(--background-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='40' viewBox='0 0 50 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23687f6c' fill-opacity='0.3'%3E%3Cpath d='M40 10L36.67 0h-2.11l3.33 10H20l-2.28 6.84L12.11 0H10l6.67 20H10l-2.28 6.84L2.11 10 5.44 0h-2.1L0 10l6.67 20-3.34 10h2.11l2.28-6.84L10 40h20l2.28-6.84L34.56 40h2.1l-3.33-10H40l2.28-6.84L47.89 40H50l-6.67-20L50 0h-2.1l-5.62 16.84L40 10zm1.23 10l-2.28-6.84L34 28h4.56l2.67-8zm-10.67 8l-2-6h-9.12l2 6h9.12zm-12.84-4.84L12.77 38h15.79l2.67-8H20l-2.28-6.84zM18.77 20H30l2.28 6.84L37.23 12H21.44l-2.67 8zm-7.33 2H16l-4.95 14.84L8.77 30l2.67-8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+h1 {
+    color: var(--on-primary);
+    padding: 20px;
+    background: var(--dp-06);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 275px;
+    margin: 20px auto 10px;
+    user-select: none; 
+}
+
+h1:hover {
+    background: var(--dp-24);
+}
+
+.container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item {
+    background: var(--dp-06);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.item:hover {
+    background: var(--dp-12);
+}
+
+a {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+a:link,
+a:visited {
+    color: var(--on-primary);
+    text-decoration: none;
+
+}
+
+a:hover,
+a:active {
+    text-decoration: underline; 
+}
+
+.fa-xmark {
+    color: var(--on-primary);
+    float:right;
+    z-index: 2;
+}
+
+.name {
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.name img {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+    vertical-align: sub; 
+}
+
+.modal-container {
+    background: rgba(0,0,0,0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.show-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: var(--background-color);
+    max-width: 95%;
+    width: 500px;
+    animation: modalopen 1s;
+    border-radius: var(--border-radius);
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.close-icon {
+    float: right;
+    color: var(--on-primary);
+    font-size: 24px;
+    position: relative;
+    top: 13px;
+    right: 13px;
+    cursor: pointer;
+}
+
+.modal-header {
+    color: var(--on-primary);
+    padding: 15px;
+    text-transform: uppercase;
+    background: var(--dp-16);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+.modal-content {
+    padding: 20px;
+    color: var(--on-primary);
+    background: var(--dp-16);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Form */
+.form-group {
+    height: 55px;
+}
+
+.form-input {
+    width: 97%;
+    padding: 5px;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    display: block;
+    outline: none;
+}
+
+.form-label {
+    color: var(--on-primary);
+    display: block;
+}
+
+button {
+    cursor: pointer;
+    color: var(--on-primary);
+    background: var(--dp-12);
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: var(--border-radius);
+    /* margin-top: 10px; */
+    font-family: 'Exo', sans-serif;
+    margin: 10px auto 0;
+    display: block;
+    text-transform: uppercase;
+}
+
+button:hover {
+    /* TODO: add hover styles */
+    /* filter:brightness does nothing in dark mode */
+    background: var(--dp-24);
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Media Query: Large Smartphone (Vertical) */
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+
+    }
 }

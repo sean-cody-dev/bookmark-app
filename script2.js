@@ -6,7 +6,7 @@ const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl = document.getElementById('website-url');
 const bookmarksContainer = document.getElementById('bookmarks-container');
 
-let bookmarks = [];
+let bookmarks = {};
 
 // Show Modal, Focus on Input
 function showModal() {
@@ -20,12 +20,10 @@ modalClose.addEventListener('click', () => modal.classList.remove('show-modal'))
 window.addEventListener('click', (e) => e.target === modal ? modal.classList.remove('show-modal') : false);
 
 // Delete Bookmark
-function deleteBookmark(url) {
-    bookmarks.forEach((bookmark, i) => {
-        if (bookmark.url === url) {
-            bookmarks.splice(i, 1); // location, number
-        }
-    });
+function deleteBookmark(id) {
+    if (bookmarks[id]) {
+        delete bookmarks[id];
+    }
     // Update bookmarks array in localStorage, repopulate DOM
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     fetchBookmarks();
@@ -46,7 +44,7 @@ function storeBookmark(e) {
         return false; // function execution stops if form is invalid
     }
 
-    bookmarks.push(formData);
+    bookmarks[formData.url] = formData;
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     fetchBookmarks();
     bookmarkForm.reset();
@@ -77,9 +75,8 @@ function buildBookmarks() {
     bookmarksContainer.textContent = '';
 
     // Build Items
-    bookmarks.forEach((bookmark) => {
-
-        const { name, url } = bookmark; // object destructuring
+    Object.keys(bookmarks).forEach((id) => {
+        const { name, url } = bookmarks[id]; // object destructuring
 
         // Item
         const item  = document.createElement('div');
@@ -117,12 +114,14 @@ function fetchBookmarks() {
         bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
     } else {
         // Create bookmakrs array in localStorage
-        bookmarks = [
-            {
-                name: 'Graceful Glow Co',
-                url: 'https://gracefulglowco.com'
-            },
-        ];
+        bookmarks = {
+            'https://gracefulglowco.com':
+                {
+                    name: 'Graceful Glow Co',
+                    url: 'https://gracefulglowco.com'
+                },
+        }
+    
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
     buildBookmarks();
